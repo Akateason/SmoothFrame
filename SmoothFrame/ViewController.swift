@@ -20,17 +20,13 @@ class ViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        pinkView.sf.fillWidth().setHeight(99).setBottom(view.sf.safeAreaBottomGap).setRight(3)
-//        pinkSubView.hf.setInnerEdge(top: 10, bottom: 10, left: 5, right: 15)
-                
-        greenView.sf.setWidth(200).setHeight(222).setRightEqual(to: pinkView, offset: 21)
-//        print(greenView.frame)
+//        pinkView.sf.setLeft(0).setHeight(99).setBottom(view.sf.safeAreaBottomGap).setRight(3) //
+        pinkView.sf.setLeft(0).setBottom(view.sf.safeAreaBottomGap).setRight(3).setHeight(99) // 这个有bug, 顺序的bug
         
+        pinkSubView.sf.setEdges(top: 3, bottom: 23, left: 11, right: 50)
         
-        
-        
-        
-        
+        greenView.sf.setWidth(200).setHeight(222).setRightEqual(to: pinkView, offset: 21).setBottom(33)
+      
     }
 
     lazy var pinkView : UIView = {
@@ -51,10 +47,6 @@ class ViewController: UIViewController {
         return view
     }()
 
-//    lazy var pinkSubView : UIView = {
-//        let _pinkSubView = UIView()
-//        _pinkSubView.backgroundColor = .systemBlue
-//        return _pinkSubView
-//    }()
+
 }
 

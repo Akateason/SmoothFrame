@@ -9,7 +9,7 @@ import UIKit
 
 
 public class SmoothFrameView {
-    private let targetView:UIView
+    private let targetView: UIView
     
     init(_ targetView:UIView) {
         self.targetView = targetView
@@ -55,6 +55,9 @@ public class SmoothFrameView {
             return 0
         }
     }()
+    
+    fileprivate var savedWidth: CGFloat?
+    fileprivate var savedHeight: CGFloat?
 }
 
 public protocol SmoothFrameExtended {
@@ -80,6 +83,7 @@ public extension SmoothFrameView {
     @discardableResult
     func setWidth(_ width:CGFloat) -> SmoothFrameView {
         targetView.frame.size.width = width
+        savedWidth = width
         return self
     }
 
@@ -90,6 +94,7 @@ public extension SmoothFrameView {
     @discardableResult
     func setHeight(_ height:CGFloat) -> SmoothFrameView {
         targetView.frame.size.height = height
+        savedHeight = height
         return self
     }
 
@@ -100,6 +105,8 @@ public extension SmoothFrameView {
     @discardableResult
     func setSize(_ size:CGSize) -> SmoothFrameView {
         targetView.frame.size = size
+        savedWidth = size.width
+        savedHeight = size.height
         return self
     }
 }
@@ -122,6 +129,7 @@ public extension SmoothFrameView {
         case .right:
             targetView.frame.size.width += widthToAdd
         }
+        savedWidth = width()
         return self
     }
 
@@ -134,11 +142,12 @@ public extension SmoothFrameView {
         case .bottom:
             targetView.frame.size.height += heightToAdd
         }
+        savedHeight = height()
         return self
     }
 }
 
-// MARK: [basic] Position and Point: (x, y, centerX, centerY, center, leftPoint, rightPoint, topPoint, bottomPoint)
+// MARK: [basic] Point: (x, y, centerX, centerY, center, leftPoint, rightPoint, topPoint, bottomPoint)
 public extension SmoothFrameView {
     func x() -> CGFloat {
         return targetView.frame.origin.x
@@ -189,19 +198,19 @@ public extension SmoothFrameView {
         targetView.center = center
         return self
     }
-    
+    // left point absolutely
     func left() -> CGFloat {
         return targetView.frame.origin.x
     }
-
+    // right point absolutely
     func right() -> CGFloat {
         return targetView.frame.origin.x + targetView.frame.size.width
     }
-
+    // bottom point absolutely
     func bottom() -> CGFloat {
         return targetView.frame.origin.y + targetView.frame.size.height
     }
-
+    // top point absolutely
     func top() -> CGFloat {
         return targetView.frame.origin.y
     }
@@ -214,6 +223,7 @@ public extension SmoothFrameView {
         guard let superview = targetView.superview else { return self }
         targetView.frame.size.width = superview.frame.size.width
         targetView.frame.origin.x = 0
+        savedWidth = width()
         return self
     }
 
@@ -222,6 +232,7 @@ public extension SmoothFrameView {
         guard let superview = targetView.superview else { return self }
         targetView.frame.size.height = superview.frame.size.height
         targetView.frame.origin.y = 0
+        savedHeight = height()
         return self
     }
 
@@ -230,6 +241,8 @@ public extension SmoothFrameView {
         guard let superview = targetView.superview else { return self }
         let height = superview.frame.size.height - safeAreaBottomGap
         targetView.frame = CGRect(x: 0, y: 0, width: superview.frame.size.width, height: height)
+        savedWidth = self.width()
+        savedHeight = self.height()
         return self
     }
 }
@@ -264,8 +277,11 @@ public extension SmoothFrameView {
     /// [Relation with superView] set bottom distance
     func setBottom(_ bottom: CGFloat) -> SmoothFrameView {
         guard let superview = targetView.superview else { return self }
-        
-        targetView.frame.origin.y = superview.frame.size.height - targetView.frame.size.height - bottom - safeAreaBottomGap
+        if savedHeight != nil { // stay saved height
+            targetView.frame.origin.y = superview.frame.size.height - targetView.frame.size.height - bottom - safeAreaBottomGap
+        } else { // changed height
+            targetView.frame.size.height = superview.frame.size.height - bottom - targetView.frame.origin.y
+        }
         return self
     }
 
@@ -280,7 +296,29 @@ public extension SmoothFrameView {
     /// [Relation with superView] set right distance
     func setRight(_ right: CGFloat) -> SmoothFrameView {
         guard let superview = targetView.superview else { return self }
-        targetView.frame.origin.x = superview.frame.size.width - targetView.frame.size.width - right
+        if savedWidth != nil { // stay saved width
+            targetView.frame.origin.x = superview.frame.size.width - targetView.frame.size.width - right
+        } else { // changed width
+            targetView.frame.size.width = superview.frame.size.width - right - targetView.frame.origin.x
+        }
+        return self
+    }
+    
+    @discardableResult
+    /// [Relation with superView] set edges
+    func setEdges(top: CGFloat? = nil, bottom: CGFloat? = nil, left: CGFloat? = nil, right: CGFloat? = nil) -> SmoothFrameView {
+        if let tmp = top {
+            setTop(tmp)
+        }
+        if let tmp = bottom {
+            setBottom(tmp)
+        }
+        if let tmp = left {
+            setLeft(tmp)
+        }
+        if let tmp = right {
+            setRight(tmp)
+        }
         return self
     }
 }
@@ -394,8 +432,6 @@ public extension SmoothFrameView {
         return self
     }
 }
-
-
 
 // MARK: helper methods
 public extension SmoothFrameView {
