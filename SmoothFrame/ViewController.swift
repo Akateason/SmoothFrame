@@ -14,6 +14,7 @@ class ViewController: UIViewController {
         view.addSubview(pinkView)
         pinkView.addSubview(pinkSubView)
         
+        view.addSubview(yellowView)
         view.addSubview(greenView)
     }
     
@@ -27,8 +28,15 @@ class ViewController: UIViewController {
         // set edges
         pinkSubView.sf.setEdges(bottom: 23, left: 11, right: 50) // 完美
         
+        yellowView.sf.setTop(88).setWidth(300).setHeight(88)
+        
         // relation with other
-        greenView.sf.setWidth(200).setHeight(222).setRightEqual(to: pinkView, offset: 21).setBottomEqual(to: pinkView, offset: 33)
+//        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setTopEqual(to: yellowView, on: .bottom, offset: 14)
+//        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setTopEqual(to: yellowView, on: .top, offset: 14)
+        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setBottomEqual(to: yellowView, on: .bottom, offset: 10)
+//        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setBottomEqual(to: yellowView, on: .top, offset: 10)
+
+
         // setBottomEqual 要针对边而言.
     }
 
@@ -42,6 +50,12 @@ class ViewController: UIViewController {
         let _pinkSubView = UIView()
         _pinkSubView.backgroundColor = .systemBlue
         return _pinkSubView
+    }()
+    
+    lazy var yellowView : UIView = {
+        let view = UIView()
+        view.backgroundColor = .yellow
+        return view
     }()
     
     lazy var greenView : UIView = {

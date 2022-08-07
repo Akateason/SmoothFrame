@@ -385,26 +385,34 @@ public extension SmoothFrameView {
  */
 public extension SmoothFrameView {
     @discardableResult
-    func setTopEqual(to view: UIView?, offset: CGFloat = 0) -> SmoothFrameView {
+    func setTopEqual(to view: UIView?, on side: SmoothFrameView.VerticalSide = .top, offset: CGFloat = 0) -> SmoothFrameView {
         guard let view = view else { return self }
         
         let viewSuperView = view.superview ?? view
         let topSuperView = fetchSuperView()
         let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
         let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
-        targetView.frame.origin.y = newOriginPoint.y + offset
+        if side == .top {
+            targetView.frame.origin.y = newOriginPoint.y + offset
+        } else if side == .bottom {
+            targetView.frame.origin.y = newOriginPoint.y + offset + view.frame.size.height
+        }
         return self
     }
     
     @discardableResult
-    func setBottomEqual(to view: UIView?, offset: CGFloat = 0) -> SmoothFrameView {
+    func setBottomEqual(to view: UIView?, on side: SmoothFrameView.VerticalSide = .bottom, offset: CGFloat = 0) -> SmoothFrameView {
         guard let view = view else { return self }
         
         let viewSuperView = view.superview ?? view
         let topSuperView = fetchSuperView()
         let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
         let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
-        targetView.frame.origin.y = newOriginPoint.y + view.frame.size.height - targetView.frame.size.height - offset
+        if side == .bottom {
+            targetView.frame.origin.y = newOriginPoint.y + view.frame.size.height - targetView.frame.size.height + offset
+        } else if side == .top {
+            targetView.frame.origin.y = newOriginPoint.y - targetView.frame.size.height + offset
+        }
         return self
     }
 
