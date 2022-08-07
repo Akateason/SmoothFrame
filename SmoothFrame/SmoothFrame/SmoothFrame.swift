@@ -437,11 +437,9 @@ public extension SmoothFrameView {
 public extension SmoothFrameView {
     func fetchSuperView() -> UIView {
         var result = targetView
-
         while result.superview != nil {
             result = result.superview ?? result
         }
-
         return result
     }
 }
