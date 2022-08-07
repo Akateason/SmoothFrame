@@ -71,7 +71,7 @@ public extension SmoothFrameExtended {
 
 extension UIView: SmoothFrameExtended {}
 
-// MARK: Size: width, height, size
+// MARK: [Basic] Size: width, height, size
 public extension SmoothFrameView {
     func width() -> CGFloat {
         return targetView.frame.size.width
@@ -104,7 +104,7 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: add width or add height
+// MARK: [Basic] add width or add height
 public extension SmoothFrameView {
     enum HorizontalSide {
         case left,right
@@ -138,7 +138,7 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: [basic] Position: (x, y, centerX, centerY, center)
+// MARK: [basic] Position: (x, y, centerX, centerY, center, leftPoint, rightPoint, topPoint, bottomPoint)
 public extension SmoothFrameView {
     func x() -> CGFloat {
         return targetView.frame.origin.x
@@ -189,9 +189,25 @@ public extension SmoothFrameView {
         targetView.center = center
         return self
     }
+    
+    func leftPoint() -> CGFloat {
+        return targetView.frame.origin.x
+    }
+
+    func rightPoint() -> CGFloat {
+        return targetView.frame.origin.x + targetView.frame.size.width
+    }
+
+    func bottomPoint() -> CGFloat {
+        return targetView.frame.origin.y + targetView.frame.size.height
+    }
+
+    func topPoint() -> CGFloat {
+        return targetView.frame.origin.y
+    }
 }
 
-// MARK: Center related to other view
+// MARK: [Relation] Center related to other view
 public extension SmoothFrameView {
     @discardableResult
     func setCenterXEqualTo(_ view:UIView?) -> SmoothFrameView {
@@ -230,45 +246,53 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: Positon: left, right, top, bottom
+// MARK: [Relation with superView] left, right, top, bottom
+/*
+        ---------------------------------------------
+        | superview          top                    |
+        |                    gap                    |
+        |          ----------------------           |
+        |          |                    |           |
+        |          |                    |           |
+        |          |                    |           |
+        |   left   |        VIEW        |   right   |
+        |   gap    |                    |    gap    |
+        |          |                    |           |
+        |          |                    |           |
+        |          ----------------------           |
+        |                  bottom                   |
+        |                    gap                    |
+        ---------------------------------------------
+ */
 public extension SmoothFrameView {
-    func left() -> CGFloat {
-        return targetView.frame.origin.x
+    @discardableResult
+    /// [Relation with superView] set top distance
+    func setTop(_ top: CGFloat) -> SmoothFrameView {
+        targetView.frame.origin.y = top
+        return self
     }
 
     @discardableResult
-    func setLeft(_ left:CGFloat) -> SmoothFrameView {
+    /// [Relation with superView] set bottom distance
+    func setBottom(_ bottom: CGFloat) -> SmoothFrameView {
+        guard let superview = targetView.superview else { return self }
+        
+        targetView.frame.origin.y = superview.frame.size.height - targetView.frame.size.height - bottom - safeAreaBottomGap
+        return self
+    }
+
+    @discardableResult
+    /// [Relation with superView] set left distance
+    func setLeft(_ left: CGFloat) -> SmoothFrameView {
         targetView.frame.origin.x = left
         return self
     }
 
-    func right() -> CGFloat {
-        return targetView.frame.origin.x + targetView.frame.size.width
-    }
-
     @discardableResult
-    func setRight(_ right:CGFloat) -> SmoothFrameView {
-        targetView.frame.origin.x = right - targetView.frame.size.width
-        return self
-    }
-
-    func bottom() -> CGFloat {
-        return targetView.frame.origin.y + targetView.frame.size.height
-    }
-
-    @discardableResult
-    func setBottom(_ bottom:CGFloat) -> SmoothFrameView {
-        targetView.frame.origin.y = bottom - targetView.frame.size.height
-        return self
-    }
-
-    func top() -> CGFloat {
-        return targetView.frame.origin.y
-    }
-
-    @discardableResult
-    func setTop(_ top:CGFloat) -> SmoothFrameView {
-        targetView.frame.origin.y = top
+    /// [Relation with superView] set right distance
+    func setRight(_ right: CGFloat) -> SmoothFrameView {
+        guard let superview = targetView.superview else { return self }
+        targetView.frame.origin.x = superview.frame.size.width - targetView.frame.size.width - right
         return self
     }
 }
@@ -324,52 +348,8 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: inner gap with superview
-/*
-        ---------------------------------------------
-        | superview          top                    |
-        |                    gap                    |
-        |          ----------------------           |
-        |          |                    |           |
-        |          |                    |           |
-        |          |                    |           |
-        |   left   |        VIEW        |   right   |
-        |   gap    |                    |    gap    |
-        |          |                    |           |
-        |          |                    |           |
-        |          ----------------------           |
-        |                  bottom                   |
-        |                    gap                    |
-        ---------------------------------------------
- */
-public extension SmoothFrameView {
-    @discardableResult
-    func setInnerTopGap(_ topGap:CGFloat) -> SmoothFrameView {
-        targetView.frame.origin.y = topGap
-        return self
-    }
 
-    @discardableResult
-    func setInnerBottomGap(_ bottomGap:CGFloat) -> SmoothFrameView {
-        guard let superview = targetView.superview else { return self }
-        
-        targetView.frame.origin.y = superview.frame.size.height - targetView.frame.size.height - bottomGap - safeAreaBottomGap
-        return self
-    }
 
-    @discardableResult
-    func setInnerLeftGap(_ leftGap:CGFloat) -> SmoothFrameView {
-        targetView.frame.origin.x = leftGap
-        return self
-    }
-
-    @discardableResult
-    func setInnerRightGap(_ rightGap:CGFloat) -> SmoothFrameView {
-        guard let superview = targetView.superview else { return self }
-        targetView.frame.origin.x = superview.frame.size.width - targetView.frame.size.width - rightGap
-        return self
-    }
-}
 
 // MARK: gap with other view
 /*
