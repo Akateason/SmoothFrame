@@ -13,6 +13,7 @@
 		8F2B8214289E1569001A6B43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F2B8212289E1569001A6B43 /* Main.storyboard */; };
 		8F2B8216289E156C001A6B43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F2B8215289E156C001A6B43 /* Assets.xcassets */; };
 		8F2B8219289E156C001A6B43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F2B8217289E156C001A6B43 /* LaunchScreen.storyboard */; };
+		8F2B8222289E1585001A6B43 /* SmoothFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B8221289E1585001A6B43 /* SmoothFrame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8F2B8215289E156C001A6B43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F2B8218289E156C001A6B43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F2B821A289E156C001A6B43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F2B8221289E1585001A6B43 /* SmoothFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoothFrame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		8F2B820B289E1568001A6B43 /* SmoothFrame */ = {
 			isa = PBXGroup;
 			children = (
+				8F2B8220289E1571001A6B43 /* SmoothFrame */,
 				8F2B820C289E1568001A6B43 /* AppDelegate.swift */,
 				8F2B820E289E1569001A6B43 /* SceneDelegate.swift */,
 				8F2B8210289E1569001A6B43 /* ViewController.swift */,
@@ -63,6 +66,14 @@
 				8F2B8215289E156C001A6B43 /* Assets.xcassets */,
 				8F2B8217289E156C001A6B43 /* LaunchScreen.storyboard */,
 				8F2B821A289E156C001A6B43 /* Info.plist */,
+			);
+			path = SmoothFrame;
+			sourceTree = "<group>";
+		};
+		8F2B8220289E1571001A6B43 /* SmoothFrame */ = {
+			isa = PBXGroup;
+			children = (
+				8F2B8221289E1585001A6B43 /* SmoothFrame.swift */,
 			);
 			path = SmoothFrame;
 			sourceTree = "<group>";
@@ -139,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F2B8211289E1569001A6B43 /* ViewController.swift in Sources */,
+				8F2B8222289E1585001A6B43 /* SmoothFrame.swift in Sources */,
 				8F2B820D289E1568001A6B43 /* AppDelegate.swift in Sources */,
 				8F2B820F289E1569001A6B43 /* SceneDelegate.swift in Sources */,
 			);
