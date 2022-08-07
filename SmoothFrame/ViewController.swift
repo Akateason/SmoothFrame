@@ -20,11 +20,14 @@ class ViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
+        // relation with super
         pinkView.sf.setLeft(0).setHeight(99).setBottom(view.sf.safeAreaBottomGap).setRight(3) //
 //        pinkView.sf.setLeft(0).setBottom(view.sf.safeAreaBottomGap).setRight(3).setHeight(99) // 这个有bug, 调用顺序的bug
         
+        // set edges
         pinkSubView.sf.setEdges(bottom: 23, left: 11, right: 50) // 完美
         
+        // relation with other
         greenView.sf.setWidth(200).setHeight(222).setRightEqual(to: pinkView, offset: 21).setBottomEqual(to: pinkView, offset: 33)
         // setBottomEqual 要针对边而言.
     }
