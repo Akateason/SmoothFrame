@@ -433,14 +433,18 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setRightEqual(to view: UIView?, offset: CGFloat = 0) -> SmoothFrameView {
+    func setRightEqual(to view: UIView?, on side: SmoothFrameView.HorizontalSide = .right, offset: CGFloat = 0) -> SmoothFrameView {
         guard let view = view else { return self }
         
         let viewSuperView = view.superview ?? view
         let topSuperView = fetchSuperView()
         let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
         let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
-        targetView.frame.origin.x = newOriginPoint.x + view.frame.size.width - targetView.frame.size.width - offset
+        if side == .right {
+            targetView.frame.origin.x = newOriginPoint.x + view.frame.size.width - targetView.frame.size.width + offset
+        } else if side == .left {
+            targetView.frame.origin.x = newOriginPoint.x  - targetView.frame.size.width + offset
+        }        
         return self
     }
 }

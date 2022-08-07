@@ -28,17 +28,15 @@ class ViewController: UIViewController {
         // set edges
         pinkSubView.sf.setEdges(bottom: 23, left: 11, right: 50) // 完美
         
-        yellowView.sf.setTop(88).setWidth(300).setHeight(88)
+        yellowView.sf.setTop(88).setWidth(300).setHeight(88).setCenterXEqual(to: view)
         
         // relation with other
 //        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setTopEqual(to: yellowView, on: .bottom, offset: 14)
 //        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setTopEqual(to: yellowView, on: .top, offset: 14)
 //        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setBottomEqual(to: yellowView, on: .bottom, offset: 10)
 //        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setBottomEqual(to: yellowView, on: .top, offset: 10)
-        greenView.sf.setWidth(200).setHeight(42).setLeftEqual(to: yellowView, on: .right, offset: 22).setBottomEqual(to: yellowView, on: .top, offset: 10)
-        
-
-        // setBottomEqual 要针对边而言.
+//        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, on: .left, offset: 22).setBottomEqual(to: yellowView, on: .top, offset: 10)
+        greenView.sf.setWidth(200).setHeight(42).setLeftEqual(to: yellowView, on: .right, offset: 22).setBottomEqual(to: yellowView, on: .top, offset: 10)     
     }
 
     lazy var pinkView : UIView = {
