@@ -104,7 +104,7 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: add width or height
+// MARK: add width or add height
 public extension SmoothFrameView {
     enum HorizontalSide {
         case left,right
@@ -138,7 +138,7 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: Position: x, y, centerX, centerY, center
+// MARK: [basic] Position: (x, y, centerX, centerY, center)
 public extension SmoothFrameView {
     func x() -> CGFloat {
         return targetView.frame.origin.x
