@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         
         // relation with super
         pinkView.sf.setLeft(0).setHeight(99).setBottom(view.sf.safeAreaBottomGap).setRight(3) //
-//        pinkView.sf.setLeft(0).setBottom(view.sf.safeAreaBottomGap).setRight(3).setHeight(99) // 这个有bug, 调用顺序的bug
+//        pinkView.sf.setLeft(0).setBottom(view.sf.safeAreaBottomGap).setRight(3).setHeight(99) // 这个有bug, 调用顺序的bug, 因为frame会覆盖
         
         // set edges
         pinkSubView.sf.setEdges(bottom: 23, left: 11, right: 50) // 完美
