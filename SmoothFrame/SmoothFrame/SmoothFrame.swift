@@ -234,45 +234,6 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: [Relation with other] Center related to other view
-public extension SmoothFrameView {
-    @discardableResult
-    func setCenterXEqualTo(_ view:UIView?) -> SmoothFrameView {
-        guard let view = view else { return self }
-        
-        let viewSuperView = view.superview ?? view
-        let topView = fetchSuperView()
-
-        let viewCenterPoint = viewSuperView.convert(view.center, to:topView)
-        let centerPoint = topView.convert(viewCenterPoint, to:targetView.superview)
-        return setCenterX(centerPoint.x)
-    }
-
-    @discardableResult
-    func setCenterYEqualTo(_ view:UIView?) -> SmoothFrameView {
-        guard let view = view else { return self }
-        
-        let viewSuperView = view.superview ?? view
-        let topView = fetchSuperView()
-
-        let viewCenterPoint = viewSuperView.convert(view.center, to:topView)
-        let centerPoint = topView.convert(viewCenterPoint, to:targetView.superview)
-        return setCenterY(centerPoint.y)
-    }
-
-    @discardableResult
-    func setCenterEqualTo(_ view:UIView?) -> SmoothFrameView {
-        guard let view = view else { return self }
-        
-        let viewSuperView = view.superview ?? view
-        let topView = fetchSuperView()
-
-        let viewCenterPoint = viewSuperView.convert(view.center, to:topView)
-        let centerPoint = topView.convert(viewCenterPoint, to:targetView.superview)
-        return setCenter(centerPoint)
-    }
-}
-
 // MARK: [Relation with superView] left, right, top, bottom
 /*
         ---------------------------------------------
@@ -321,6 +282,46 @@ public extension SmoothFrameView {
         guard let superview = targetView.superview else { return self }
         targetView.frame.origin.x = superview.frame.size.width - targetView.frame.size.width - right
         return self
+    }
+}
+
+
+// MARK: [Relation with other] Center related to other view
+public extension SmoothFrameView {
+    @discardableResult
+    func setCenterXEqualTo(_ view:UIView?) -> SmoothFrameView {
+        guard let view = view else { return self }
+        
+        let viewSuperView = view.superview ?? view
+        let topView = fetchSuperView()
+
+        let viewCenterPoint = viewSuperView.convert(view.center, to:topView)
+        let centerPoint = topView.convert(viewCenterPoint, to:targetView.superview)
+        return setCenterX(centerPoint.x)
+    }
+
+    @discardableResult
+    func setCenterYEqualTo(_ view:UIView?) -> SmoothFrameView {
+        guard let view = view else { return self }
+        
+        let viewSuperView = view.superview ?? view
+        let topView = fetchSuperView()
+
+        let viewCenterPoint = viewSuperView.convert(view.center, to:topView)
+        let centerPoint = topView.convert(viewCenterPoint, to:targetView.superview)
+        return setCenterY(centerPoint.y)
+    }
+
+    @discardableResult
+    func setCenterEqualTo(_ view:UIView?) -> SmoothFrameView {
+        guard let view = view else { return self }
+        
+        let viewSuperView = view.superview ?? view
+        let topView = fetchSuperView()
+
+        let viewCenterPoint = viewSuperView.convert(view.center, to:topView)
+        let centerPoint = topView.convert(viewCenterPoint, to:targetView.superview)
+        return setCenter(centerPoint)
     }
 }
 
