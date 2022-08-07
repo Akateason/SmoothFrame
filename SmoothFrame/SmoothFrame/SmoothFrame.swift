@@ -11,12 +11,12 @@ import UIKit
 public class SmoothFrameView {
     private let targetView: UIView
     
-    init(_ targetView:UIView) {
+    init(_ targetView: UIView) {
         self.targetView = targetView
     }
     
     // MARK: SafeArea
-    lazy var safeAreaBottomGap:CGFloat = {
+    lazy var safeAreaBottomGap: CGFloat = {
         guard let superview = targetView.superview else { return 0 }
         if #available(iOS 11.0, *) {
             if superview.safeAreaLayoutGuide.layoutFrame.size.height > 0 {
@@ -29,7 +29,7 @@ public class SmoothFrameView {
         }
     }()
 
-    lazy var safeAreaTopGap:CGFloat = {
+    lazy var safeAreaTopGap: CGFloat = {
         guard let superview = targetView.superview else { return 0 }
         if #available(iOS 11.0, *) {
             return superview.safeAreaLayoutGuide.layoutFrame.origin.y
@@ -38,7 +38,7 @@ public class SmoothFrameView {
         }
     }()
 
-    lazy var safeAreaLeftGap:CGFloat = {
+    lazy var safeAreaLeftGap: CGFloat = {
         guard let superview = targetView.superview else { return 0 }
         if #available(iOS 11.0, *) {
             return superview.safeAreaLayoutGuide.layoutFrame.origin.x
@@ -47,7 +47,7 @@ public class SmoothFrameView {
         }
     }()
 
-    lazy var safeAreaRightGap:CGFloat = {
+    lazy var safeAreaRightGap: CGFloat = {
         guard let superview = targetView.superview else { return 0 }
         if #available(iOS 11.0, *) {
             return superview.safeAreaLayoutGuide.layoutFrame.origin.x
@@ -81,7 +81,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setWidth(_ width:CGFloat) -> SmoothFrameView {
+    func setWidth(_ width: CGFloat) -> SmoothFrameView {
         targetView.frame.size.width = width
         savedWidth = width
         return self
@@ -92,7 +92,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setHeight(_ height:CGFloat) -> SmoothFrameView {
+    func setHeight(_ height: CGFloat) -> SmoothFrameView {
         targetView.frame.size.height = height
         savedHeight = height
         return self
@@ -103,7 +103,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setSize(_ size:CGSize) -> SmoothFrameView {
+    func setSize(_ size: CGSize) -> SmoothFrameView {
         targetView.frame.size = size
         savedWidth = size.width
         savedHeight = size.height
@@ -121,7 +121,7 @@ public extension SmoothFrameView {
     }
     
     @discardableResult
-    func addWidth(_ widthToAdd:CGFloat, on side:HorizontalSide) -> SmoothFrameView {
+    func addWidth(_ widthToAdd: CGFloat, on side: SmoothFrameView.HorizontalSide) -> SmoothFrameView {
         switch side {
         case .left:
             targetView.frame.size.width += widthToAdd
@@ -134,7 +134,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func addHeight(_ heightToAdd:CGFloat, on side:VerticalSide) -> SmoothFrameView {
+    func addHeight(_ heightToAdd: CGFloat, on side: SmoothFrameView.VerticalSide) -> SmoothFrameView {
         switch side {
         case .top:
             targetView.frame.size.height += heightToAdd
@@ -154,7 +154,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setX(_ x:CGFloat) -> SmoothFrameView {
+    func setX(_ x: CGFloat) -> SmoothFrameView {
         targetView.frame.origin.x = x
         return self
     }
@@ -164,7 +164,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setY(_ y:CGFloat) -> SmoothFrameView {
+    func setY(_ y: CGFloat) -> SmoothFrameView {
         targetView.frame.origin.y = y
         return self
     }
@@ -174,7 +174,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setCenterX(_ centerX:CGFloat) -> SmoothFrameView {
+    func setCenterX(_ centerX: CGFloat) -> SmoothFrameView {
         targetView.center.x = centerX
         return self
     }
@@ -184,7 +184,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setCenterY(_ centerY:CGFloat) -> SmoothFrameView {
+    func setCenterY(_ centerY: CGFloat) -> SmoothFrameView {
         targetView.center.y = centerY
         return self
     }
@@ -194,7 +194,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setCenter(_ center:CGPoint) -> SmoothFrameView {
+    func setCenter(_ center: CGPoint) -> SmoothFrameView {
         targetView.center = center
         return self
     }
@@ -327,7 +327,7 @@ public extension SmoothFrameView {
 // MARK: [Relation with other] Center related to other view
 public extension SmoothFrameView {
     @discardableResult
-    func setCenterXEqualTo(_ view:UIView?) -> SmoothFrameView {
+    func setCenterXEqual(to view: UIView?) -> SmoothFrameView {
         guard let view = view else { return self }
         
         let viewSuperView = view.superview ?? view
@@ -339,7 +339,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setCenterYEqualTo(_ view:UIView?) -> SmoothFrameView {
+    func setCenterYEqual(to view: UIView?) -> SmoothFrameView {
         guard let view = view else { return self }
         
         let viewSuperView = view.superview ?? view
@@ -351,7 +351,7 @@ public extension SmoothFrameView {
     }
 
     @discardableResult
-    func setCenterEqualTo(_ view:UIView?) -> SmoothFrameView {
+    func setCenterEqual(to view: UIView?) -> SmoothFrameView {
         guard let view = view else { return self }
         
         let viewSuperView = view.superview ?? view
