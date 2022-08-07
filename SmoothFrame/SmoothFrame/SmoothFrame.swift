@@ -10,8 +10,13 @@ import UIKit
 
 public class SmoothFrameView {
     private let targetView:UIView
-
-    public lazy var safeAreaBottomGap:CGFloat = {
+    
+    init(_ targetView:UIView) {
+        self.targetView = targetView
+    }
+    
+    // MARK: SafeArea
+    lazy var safeAreaBottomGap:CGFloat = {
         guard let superview = targetView.superview else { return 0 }
         if #available(iOS 11.0, *) {
             if superview.safeAreaLayoutGuide.layoutFrame.size.height > 0 {
@@ -24,7 +29,7 @@ public class SmoothFrameView {
         }
     }()
 
-    public lazy var safeAreaTopGap:CGFloat = {
+    lazy var safeAreaTopGap:CGFloat = {
         guard let superview = targetView.superview else { return 0 }
         if #available(iOS 11.0, *) {
             return superview.safeAreaLayoutGuide.layoutFrame.origin.y
@@ -33,7 +38,7 @@ public class SmoothFrameView {
         }
     }()
 
-    public lazy var safeAreaLeftGap:CGFloat = {
+    lazy var safeAreaLeftGap:CGFloat = {
         guard let superview = targetView.superview else { return 0 }
         if #available(iOS 11.0, *) {
             return superview.safeAreaLayoutGuide.layoutFrame.origin.x
@@ -42,7 +47,7 @@ public class SmoothFrameView {
         }
     }()
 
-    public lazy var safeAreaRightGap:CGFloat = {
+    lazy var safeAreaRightGap:CGFloat = {
         guard let superview = targetView.superview else { return 0 }
         if #available(iOS 11.0, *) {
             return superview.safeAreaLayoutGuide.layoutFrame.origin.x
@@ -50,10 +55,6 @@ public class SmoothFrameView {
             return 0
         }
     }()
-
-    init(_ targetView:UIView) {
-        self.targetView = targetView
-    }
 }
 
 public protocol SmoothFrameExtended {
