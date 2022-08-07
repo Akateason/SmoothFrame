@@ -138,7 +138,7 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: [basic] Position: (x, y, centerX, centerY, center, leftPoint, rightPoint, topPoint, bottomPoint)
+// MARK: [basic] Position and Point: (x, y, centerX, centerY, center, leftPoint, rightPoint, topPoint, bottomPoint)
 public extension SmoothFrameView {
     func x() -> CGFloat {
         return targetView.frame.origin.x
@@ -190,31 +190,58 @@ public extension SmoothFrameView {
         return self
     }
     
-    func leftPoint() -> CGFloat {
+    func left() -> CGFloat {
         return targetView.frame.origin.x
     }
 
-    func rightPoint() -> CGFloat {
+    func right() -> CGFloat {
         return targetView.frame.origin.x + targetView.frame.size.width
     }
 
-    func bottomPoint() -> CGFloat {
+    func bottom() -> CGFloat {
         return targetView.frame.origin.y + targetView.frame.size.height
     }
 
-    func topPoint() -> CGFloat {
+    func top() -> CGFloat {
         return targetView.frame.origin.y
     }
 }
 
-// MARK: [Relation] Center related to other view
+// MARK: [Basic] Fill
+public extension SmoothFrameView {
+    @discardableResult
+    func fillWidth() -> SmoothFrameView {
+        guard let superview = targetView.superview else { return self }
+        targetView.frame.size.width = superview.frame.size.width
+        targetView.frame.origin.x = 0
+        return self
+    }
+
+    @discardableResult
+    func fillHeight() -> SmoothFrameView {
+        guard let superview = targetView.superview else { return self }
+        targetView.frame.size.height = superview.frame.size.height
+        targetView.frame.origin.y = 0
+        return self
+    }
+
+    @discardableResult
+    func fill() -> SmoothFrameView {
+        guard let superview = targetView.superview else { return self }
+        let height = superview.frame.size.height - safeAreaBottomGap
+        targetView.frame = CGRect(x: 0, y: 0, width: superview.frame.size.width, height: height)
+        return self
+    }
+}
+
+// MARK: [Relation with other] Center related to other view
 public extension SmoothFrameView {
     @discardableResult
     func setCenterXEqualTo(_ view:UIView?) -> SmoothFrameView {
         guard let view = view else { return self }
         
         let viewSuperView = view.superview ?? view
-        let topView = fetchTopView()
+        let topView = fetchSuperView()
 
         let viewCenterPoint = viewSuperView.convert(view.center, to:topView)
         let centerPoint = topView.convert(viewCenterPoint, to:targetView.superview)
@@ -226,7 +253,7 @@ public extension SmoothFrameView {
         guard let view = view else { return self }
         
         let viewSuperView = view.superview ?? view
-        let topView = fetchTopView()
+        let topView = fetchSuperView()
 
         let viewCenterPoint = viewSuperView.convert(view.center, to:topView)
         let centerPoint = topView.convert(viewCenterPoint, to:targetView.superview)
@@ -238,7 +265,7 @@ public extension SmoothFrameView {
         guard let view = view else { return self }
         
         let viewSuperView = view.superview ?? view
-        let topView = fetchTopView()
+        let topView = fetchSuperView()
 
         let viewCenterPoint = viewSuperView.convert(view.center, to:topView)
         let centerPoint = topView.convert(viewCenterPoint, to:targetView.superview)
@@ -297,61 +324,7 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: Position equal to view
-public extension SmoothFrameView {
-    @discardableResult
-    func topEqualToView(_ view:UIView?) -> SmoothFrameView {
-        guard let view = view else { return self }
-        
-        let viewSuperView = view.superview ?? view
-        let topSuperView = fetchTopView()
-        let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
-        let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
-        targetView.frame.origin.y = newOriginPoint.y
-        return self
-    }
-    
-    @discardableResult
-    func bottomEqualToView(_ view:UIView?) -> SmoothFrameView {
-        guard let view = view else { return self }
-        
-        let viewSuperView = view.superview ?? view
-        let topSuperView = fetchTopView()
-        let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
-        let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
-        targetView.frame.origin.y = newOriginPoint.y + view.frame.size.height - targetView.frame.size.height
-        return self
-    }
-
-    @discardableResult
-    func leftEqualToView(_ view:UIView?) -> SmoothFrameView {
-        guard let view = view else { return self }
-
-        let viewSuperView = view.superview ?? view
-        let topSuperView = fetchTopView()
-        let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
-        let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
-        targetView.frame.origin.x = newOriginPoint.x
-        return self
-    }
-
-    @discardableResult
-    func rightEqualToView(_ view:UIView?) -> SmoothFrameView {
-        guard let view = view else { return self }
-        
-        let viewSuperView = view.superview ?? view
-        let topSuperView = fetchTopView()
-        let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
-        let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
-        targetView.frame.origin.x = newOriginPoint.x + view.frame.size.width - targetView.frame.size.width
-        return self
-    }
-}
-
-
-
-
-// MARK: gap with other view
+// MARK: [Relation with other] gap with other view
 /*
                |                   |
                |                   |
@@ -373,82 +346,59 @@ public extension SmoothFrameView {
  */
 public extension SmoothFrameView {
     @discardableResult
-    func setTopGap(_ topGap:CGFloat, fromView:UIView?) -> SmoothFrameView {
-        guard let fromView = fromView else { return self }
+    func setTopEqual(to view: UIView?, offset: CGFloat = 0) -> SmoothFrameView {
+        guard let view = view else { return self }
         
-        let fromViewSuperView = fromView.superview ?? fromView
-        let topView = fetchTopView()
-        let viewOriginPoint = fromViewSuperView.convert(fromView.frame.origin, to: topView)
-        let newOriginPoint = topView.convert(viewOriginPoint, to:targetView.superview)
-        targetView.frame.origin.y = newOriginPoint.y + topGap + fromView.frame.size.height
+        let viewSuperView = view.superview ?? view
+        let topSuperView = fetchSuperView()
+        let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
+        let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
+        targetView.frame.origin.y = newOriginPoint.y + offset
+        return self
+    }
+    
+    @discardableResult
+    func setBottomEqual(to view: UIView?, offset: CGFloat = 0) -> SmoothFrameView {
+        guard let view = view else { return self }
+        
+        let viewSuperView = view.superview ?? view
+        let topSuperView = fetchSuperView()
+        let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
+        let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
+        targetView.frame.origin.y = newOriginPoint.y + view.frame.size.height - targetView.frame.size.height - offset
         return self
     }
 
     @discardableResult
-    func setBottomGap(_ bottomGap:CGFloat, fromView:UIView?) -> SmoothFrameView {
-        guard let fromView = fromView else { return self }
-        
-        let fromViewSuperView = fromView.superview ?? fromView
-        let fromViewOriginPoint = fromViewSuperView.convert(fromView.frame.origin, to:targetView.superview)
-        targetView.frame.origin.y = fromViewOriginPoint.y - bottomGap - targetView.frame.size.height
+    func setLeftEqual(to view: UIView?, offset: CGFloat = 0) -> SmoothFrameView {
+        guard let view = view else { return self }
+
+        let viewSuperView = view.superview ?? view
+        let topSuperView = fetchSuperView()
+        let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
+        let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
+        targetView.frame.origin.x = newOriginPoint.x + offset
         return self
     }
 
     @discardableResult
-    func setLeftGap(_ leftGap:CGFloat, fromView:UIView?) -> SmoothFrameView {
-        guard let fromView = fromView else { return self }
+    func setRightEqual(to view: UIView?, offset: CGFloat = 0) -> SmoothFrameView {
+        guard let view = view else { return self }
         
-        let fromViewSuperView = fromView.superview ?? fromView
-        let topView = fetchTopView()
-        let fromViewOriginPoint = fromViewSuperView.convert(fromView.frame.origin, to:topView)
-        let newOriginPoint = topView.convert(fromViewOriginPoint, to: targetView.superview)
-        targetView.frame.origin.x = newOriginPoint.x + leftGap + fromView.frame.size.width
-        return self
-    }
-
-    @discardableResult
-    func setRightGap(_ rightGap:CGFloat, fromView:UIView?) -> SmoothFrameView {
-        guard let fromView = fromView else { return self }
-        
-        let fromViewSuperView = fromView.superview ?? fromView
-        let topView = fetchTopView()
-        let fromViewOriginPoint = fromViewSuperView.convert(fromView.frame.origin, to:topView)
-        let newOriginPoint = topView.convert(fromViewOriginPoint, to: targetView.superview)
-        targetView.frame.origin.x = newOriginPoint.x - rightGap - fromView.frame.size.width
+        let viewSuperView = view.superview ?? view
+        let topSuperView = fetchSuperView()
+        let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
+        let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
+        targetView.frame.origin.x = newOriginPoint.x + view.frame.size.width - targetView.frame.size.width - offset
         return self
     }
 }
 
-// MARK: Fill
-public extension SmoothFrameView {
-    @discardableResult
-    func fillWidth() -> SmoothFrameView {
-        guard let superview = targetView.superview else { return self }
-        targetView.frame.size.width = superview.frame.size.width
-        targetView.frame.origin.x = 0
-        return self
-    }
 
-    @discardableResult
-    func fillHeight() -> SmoothFrameView {
-        guard let superview = targetView.superview else { return self }
-        targetView.frame.size.height = superview.frame.size.height
-        targetView.frame.origin.y = 0
-        return self
-    }
-
-    @discardableResult
-    func fill() -> SmoothFrameView {
-        guard let superview = targetView.superview else { return self }
-        let height = superview.frame.size.height - safeAreaBottomGap
-        targetView.frame = CGRect(x: 0, y: 0, width: superview.frame.size.width, height: height)
-        return self
-    }
-}
 
 // MARK: helper methods
 public extension SmoothFrameView {
-    func fetchTopView() -> UIView {
+    func fetchSuperView() -> UIView {
         var result = targetView
 
         while result.superview != nil {

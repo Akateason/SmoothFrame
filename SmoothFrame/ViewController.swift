@@ -13,14 +13,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(pinkView)
         pinkView.addSubview(pinkSubView)
+        
+        view.addSubview(greenView)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        print(view.sf.safeAreaBottomGap)
-        pinkView.sf.setBottom(view.sf.safeAreaBottomGap).fillWidth().setHeight(99)
+        pinkView.sf.fillWidth().setHeight(99).setBottom(view.sf.safeAreaBottomGap).setRight(3)
 //        pinkSubView.hf.setInnerEdge(top: 10, bottom: 10, left: 5, right: 15)
+                
+        greenView.sf.setWidth(200).setHeight(222).setRightEqual(to: pinkView, offset: 21)
+//        print(greenView.frame)
+        
+        
+        
+        
+        
         
     }
 
@@ -35,6 +44,17 @@ class ViewController: UIViewController {
         _pinkSubView.backgroundColor = .systemBlue
         return _pinkSubView
     }()
+    
+    lazy var greenView : UIView = {
+        let view = UIView()
+        view.backgroundColor = .green
+        return view
+    }()
 
+//    lazy var pinkSubView : UIView = {
+//        let _pinkSubView = UIView()
+//        _pinkSubView.backgroundColor = .systemBlue
+//        return _pinkSubView
+//    }()
 }
 
