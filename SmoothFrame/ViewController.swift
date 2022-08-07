@@ -33,9 +33,10 @@ class ViewController: UIViewController {
         // relation with other
 //        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setTopEqual(to: yellowView, on: .bottom, offset: 14)
 //        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setTopEqual(to: yellowView, on: .top, offset: 14)
-        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setBottomEqual(to: yellowView, on: .bottom, offset: 10)
+//        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setBottomEqual(to: yellowView, on: .bottom, offset: 10)
 //        greenView.sf.setWidth(200).setHeight(42).setRightEqual(to: yellowView, offset: 21).setBottomEqual(to: yellowView, on: .top, offset: 10)
-
+        greenView.sf.setWidth(200).setHeight(42).setLeftEqual(to: yellowView, on: .right, offset: 22).setBottomEqual(to: yellowView, on: .top, offset: 10)
+        
 
         // setBottomEqual 要针对边而言.
     }
