@@ -55,9 +55,6 @@ public class SmoothFrameView {
             return 0
         }
     }()
-    
-    fileprivate var savedWidth: CGFloat?
-    fileprivate var savedHeight: CGFloat?
 }
 
 public protocol SmoothFrameExtended {
@@ -83,7 +80,6 @@ public extension SmoothFrameView {
     @discardableResult
     func setWidth(_ width: CGFloat) -> SmoothFrameView {
         targetView.frame.size.width = width
-        savedWidth = width
         return self
     }
 
@@ -94,7 +90,6 @@ public extension SmoothFrameView {
     @discardableResult
     func setHeight(_ height: CGFloat) -> SmoothFrameView {
         targetView.frame.size.height = height
-        savedHeight = height
         return self
     }
 
@@ -105,8 +100,6 @@ public extension SmoothFrameView {
     @discardableResult
     func setSize(_ size: CGSize) -> SmoothFrameView {
         targetView.frame.size = size
-        savedWidth = size.width
-        savedHeight = size.height
         return self
     }
 }
@@ -114,10 +107,10 @@ public extension SmoothFrameView {
 // MARK: [Basic] add width or add height
 public extension SmoothFrameView {
     enum HorizontalSide {
-        case left,right
+        case left, right
     }
     enum VerticalSide {
-        case top,bottom
+        case top, bottom
     }
     
     @discardableResult
@@ -129,7 +122,6 @@ public extension SmoothFrameView {
         case .right:
             targetView.frame.size.width += widthToAdd
         }
-        savedWidth = width()
         return self
     }
 
@@ -142,7 +134,6 @@ public extension SmoothFrameView {
         case .bottom:
             targetView.frame.size.height += heightToAdd
         }
-        savedHeight = height()
         return self
     }
 }
@@ -223,7 +214,6 @@ public extension SmoothFrameView {
         guard let superview = targetView.superview else { return self }
         targetView.frame.size.width = superview.frame.size.width
         targetView.frame.origin.x = 0
-        savedWidth = width()
         return self
     }
 
@@ -232,7 +222,6 @@ public extension SmoothFrameView {
         guard let superview = targetView.superview else { return self }
         targetView.frame.size.height = superview.frame.size.height
         targetView.frame.origin.y = 0
-        savedHeight = height()
         return self
     }
 
@@ -241,8 +230,6 @@ public extension SmoothFrameView {
         guard let superview = targetView.superview else { return self }
         let height = superview.frame.size.height - safeAreaBottomGap
         targetView.frame = CGRect(x: 0, y: 0, width: superview.frame.size.width, height: height)
-        savedWidth = self.width()
-        savedHeight = self.height()
         return self
     }
 }
@@ -277,7 +264,7 @@ public extension SmoothFrameView {
     /// [Relation with superView] set bottom distance
     func setBottom(_ bottom: CGFloat) -> SmoothFrameView {
         guard let superview = targetView.superview else { return self }
-        if savedHeight != nil { // stay saved height
+        if height() > 0 { // stay saved height
             targetView.frame.origin.y = superview.frame.size.height - targetView.frame.size.height - bottom - safeAreaBottomGap
         } else { // changed height
             targetView.frame.size.height = superview.frame.size.height - bottom - targetView.frame.origin.y
@@ -296,7 +283,7 @@ public extension SmoothFrameView {
     /// [Relation with superView] set right distance
     func setRight(_ right: CGFloat) -> SmoothFrameView {
         guard let superview = targetView.superview else { return self }
-        if savedWidth != nil { // stay saved width
+        if width() > 0 { // stay saved width
             targetView.frame.origin.x = superview.frame.size.width - targetView.frame.size.width - right
         } else { // changed width
             targetView.frame.size.width = superview.frame.size.width - right - targetView.frame.origin.x
@@ -363,7 +350,7 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: [Relation with other] gap with other view
+// MARK: WIP未完成,有bug. [Relation with other] gap with other view
 /*
                |                   |
                |                   |
@@ -392,11 +379,14 @@ public extension SmoothFrameView {
         let topSuperView = fetchSuperView()
         let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
         let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
+        
+        var newTop = 0.0
         if side == .top {
-            targetView.frame.origin.y = newOriginPoint.y + offset
+            newTop = newOriginPoint.y + offset
         } else if side == .bottom {
-            targetView.frame.origin.y = newOriginPoint.y + offset + view.frame.size.height
+            newTop = newOriginPoint.y + offset + view.frame.size.height
         }
+        setTop(newTop)
         return self
     }
     
@@ -408,11 +398,15 @@ public extension SmoothFrameView {
         let topSuperView = fetchSuperView()
         let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
         let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
+        var newBottom = 0.0
         if side == .bottom {
-            targetView.frame.origin.y = newOriginPoint.y + view.frame.size.height - targetView.frame.size.height + offset
+            print("targetView.height: \(targetView.frame.size.height)")
+            newBottom = newOriginPoint.y + view.frame.size.height - targetView.frame.size.height + offset
         } else if side == .top {
-            targetView.frame.origin.y = newOriginPoint.y - targetView.frame.size.height + offset
+            newBottom = newOriginPoint.y - targetView.frame.size.height + offset
         }
+        print("bottom \(newBottom)")
+        setBottom(topSuperView.frame.size.height - newBottom)
         return self
     }
 
@@ -424,11 +418,13 @@ public extension SmoothFrameView {
         let topSuperView = fetchSuperView()
         let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
         let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
+        var newLeft = 0.0
         if side == .left {
-            targetView.frame.origin.x = newOriginPoint.x + offset
+            newLeft = newOriginPoint.x + offset
         } else if side == .right {
-            targetView.frame.origin.x = newOriginPoint.x + offset + view.frame.size.width
+            newLeft = newOriginPoint.x + offset + view.frame.size.width
         }
+        setLeft(newLeft)
         return self
     }
 
@@ -440,11 +436,13 @@ public extension SmoothFrameView {
         let topSuperView = fetchSuperView()
         let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
         let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
+        var newRight = 0.0
         if side == .right {
-            targetView.frame.origin.x = newOriginPoint.x + view.frame.size.width - targetView.frame.size.width + offset
+            newRight = newOriginPoint.x + view.frame.size.width - targetView.frame.size.width + offset
         } else if side == .left {
-            targetView.frame.origin.x = newOriginPoint.x  - targetView.frame.size.width + offset
-        }        
+            newRight = newOriginPoint.x  - targetView.frame.size.width + offset
+        }
+        setRight(topSuperView.frame.size.width - newRight)
         return self
     }
 }
