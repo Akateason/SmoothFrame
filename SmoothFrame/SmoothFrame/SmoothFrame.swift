@@ -350,7 +350,7 @@ public extension SmoothFrameView {
     }
 }
 
-// MARK: WIP未完成,有bug. [Relation with other] gap with other view
+// MARK: [Relation with other] gap with other view
 /*
                |                   |
                |                   |
@@ -399,14 +399,22 @@ public extension SmoothFrameView {
         let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
         let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
         var newBottom = 0.0
+        
         if side == .bottom {
-            print("targetView.height: \(targetView.frame.size.height)")
-            newBottom = newOriginPoint.y + view.frame.size.height - targetView.frame.size.height + offset
+            if height() > 0 {
+                newBottom = newOriginPoint.y + view.frame.size.height + offset
+                setBottom(topSuperView.frame.size.height - newBottom - targetView.sf.safeAreaBottomGap)
+            } else {
+                self.setHeight(view.sf.height() + newOriginPoint.y + offset - targetView.frame.origin.y)
+            }
         } else if side == .top {
-            newBottom = newOriginPoint.y - targetView.frame.size.height + offset
+            if height() > 0 {
+                newBottom = newOriginPoint.y + offset
+                setBottom(topSuperView.frame.size.height - newBottom - targetView.sf.safeAreaBottomGap)
+            } else {
+                self.setHeight(newOriginPoint.y + offset - targetView.frame.origin.y)
+            }
         }
-        print("bottom \(newBottom)")
-        setBottom(topSuperView.frame.size.height - newBottom)
         return self
     }
 
@@ -437,12 +445,22 @@ public extension SmoothFrameView {
         let viewOriginPoint = viewSuperView.convert(view.frame.origin, to:topSuperView)
         let newOriginPoint = topSuperView.convert(viewOriginPoint, to: targetView.superview)
         var newRight = 0.0
+        
         if side == .right {
-            newRight = newOriginPoint.x + view.frame.size.width - targetView.frame.size.width + offset
+            if width() > 0 {
+                newRight = newOriginPoint.x + view.frame.size.width + offset
+                setRight(topSuperView.frame.size.width - newRight)
+            } else {
+                self.setWidth(view.sf.width() + newOriginPoint.x + offset - targetView.frame.origin.x)
+            }
         } else if side == .left {
-            newRight = newOriginPoint.x  - targetView.frame.size.width + offset
+            if width() > 0 {
+                newRight = newOriginPoint.x + offset
+                setRight(topSuperView.frame.size.width - newRight)
+            } else {
+                self.setWidth(newOriginPoint.x + offset - targetView.frame.origin.x)
+            }
         }
-        setRight(topSuperView.frame.size.width - newRight)
         return self
     }
 }

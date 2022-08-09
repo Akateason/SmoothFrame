@@ -21,25 +21,23 @@ class ViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        // relation with super
+        // 1.1 Relation with super
         pinkView.sf.setLeft(0).setHeight(99).setBottom(0).setRight(3)
+        print("pink: \(pinkView.frame)")
+        // 1.2 set edges
+        pinkSubView.sf.setEdges(top: 2, bottom: 23, left: 11, right: 50)
+        print("pinksub: \(pinkSubView.frame)")
         
-        // set edges
-        pinkSubView.sf.setEdges(bottom: 23, left: 11, right: 50)
-        
-        // relation with other
-        yellowView.sf.setTop(88).setWidth(300).setHeight(88).setCenterXEqual(to: view)
+        //2 relation with other
+        yellowView.sf.setTop(100).setWidth(300).setHeight(88).setCenterXEqual(to: view)
         print("yellow: \(yellowView.frame)")
-        
-        // 有bug 长宽没了, 不明原因 加了pinkView之后, 就没了
-//        greenView.sf
-//            .setTopEqual(to: yellowView, offset: 9)
-//            .setBottomEqual(to: yellowView, on: .bottom, offset: -10)
-//            .setLeftEqual(to: yellowView, on: .left, offset: 22)
-//            .setRightEqual(to: yellowView)
-                
-//        greenView.sf.setTop(33).setLeft(33).setBottom(33).setRight(34)
+        greenView.sf
+            .setTopEqual(to: yellowView, offset: 20)
+            .setBottomEqual(to: yellowView, on: .bottom, offset: -10)
+            .setLeftEqual(to: yellowView, on: .left, offset: -12)
+            .setRightEqual(to: yellowView, on: .right, offset: 22)
         print("green: \(greenView.frame)")
+        
         print("---------\n")
     }
 
