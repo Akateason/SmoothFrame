@@ -1,11 +1,12 @@
 # SmoothFrame
 # [WIP] 
 
-## SmoothFrame是一种关系型的frame布局.
-## 顺滑的给UI布局, 写法类似SnapKit. 并且无序关注讨厌的autoLayout约束警告. 
-## 支持链式调用.
-## 由于SmoothFrame是基于frame的布局系统, 所以在任何场景都可以直接修改view的布局, frame会直接覆盖.
-## 由于frame绝对定位的特性, 注意setFrame的最佳时机是VC.viewWillLayoutSubviews() 和 view.layoutSubViews() .
+
+- SmoothFrame是一种关系型的frame布局.
+- 顺滑的给UI布局, 写法类似SnapKit. 并且无序关注讨厌的autoLayout约束警告. 
+- 支持链式调用.
+- 由于SmoothFrame是基于frame的布局系统, 所以在任何场景都可以直接修改view的布局, frame会直接覆盖.
+- 由于frame绝对定位的特性, 注意setFrame的最佳时机是VC.viewWillLayoutSubviews() 和 view.layoutSubViews() .
 
 
 ```swift
