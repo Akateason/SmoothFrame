@@ -5,59 +5,59 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: import_from_git" time="0.950133">
+      <testcase classname="fastlane.lanes" name="00: import_from_git" time="0.961386">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: git_pull" time="8.059778">
+      <testcase classname="fastlane.lanes" name="01: git_pull" time="8.641391">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="02: ensure_git_branch" time="0.01528">
+      <testcase classname="fastlane.lanes" name="02: ensure_git_branch" time="0.014033">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: version_bump_podspec" time="0.001265">
+      <testcase classname="fastlane.lanes" name="03: version_bump_podspec" time="0.001279">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="04: git_add" time="0.019663">
+      <testcase classname="fastlane.lanes" name="04: git_add" time="0.017517">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: git_commit" time="0.03069">
+      <testcase classname="fastlane.lanes" name="05: git_commit" time="0.032749">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="06: push_to_git_remote" time="4.129286">
+      <testcase classname="fastlane.lanes" name="06: push_to_git_remote" time="4.126655">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="07: git_tag_exists" time="0.014059">
+      <testcase classname="fastlane.lanes" name="07: git_tag_exists" time="0.014937">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="08: add_git_tag" time="0.023951">
+      <testcase classname="fastlane.lanes" name="08: add_git_tag" time="0.022277">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="09: push_git_tags" time="3.724829">
+      <testcase classname="fastlane.lanes" name="09: push_git_tags" time="3.650461">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="10: pod_push" time="44.515251">
+      <testcase classname="fastlane.lanes" name="10: pod_push" time="71.82512">
         
-          <failure message="/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/actions/actions_helper.rb:67:in `execute_action'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:255:in `block in execute_action'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:229:in `chdir'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:229:in `execute_action'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing'&#10;../../../../../../../var/folders/41/kz5m30dx189_z3pcxz76_tkr0000gn/T/fl_clone20220810-24344-dz7i3h/fastlane-files.git/fastlane/Fastfile:27:in `block in parsing_binding'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:49:in `block in execute'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:45:in `chdir'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:45:in `execute'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/lane_manager.rb:47:in `cruise_lane'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/commands_generator.rb:110:in `block (2 levels) in run'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-4.6.0/lib/commander/command.rb:187:in `call'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-4.6.0/lib/commander/command.rb:157:in `run'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-4.6.0/lib/commander/runner.rb:444:in `run_active_command'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:124:in `run!'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-4.6.0/lib/commander/delegates.rb:18:in `run!'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/commands_generator.rb:354:in `run'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/commands_generator.rb:43:in `start'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/cli_tools_distributor.rb:123:in `take_off'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/bin/fastlane:23:in `&lt;top (required)&gt;'&#10;/usr/local/bin/fastlane:23:in `load'&#10;/usr/local/bin/fastlane:23:in `&lt;main&gt;'&#10;&#10;Exit status of command 'pod trunk push 'SmoothFrame.podspec' --allow-warnings --use-libraries' was 1 instead of 0.&#10;Updating spec repo `trunk`&#10;&#10;CocoaPods 1.11.3 is available.&#10;To update use: `gem install cocoapods`&#10;&#10;For more information, see https://blog.cocoapods.org and the CHANGELOG for this version at https://github.com/CocoaPods/CocoaPods/releases/tag/1.11.3&#10;&#10;Validating podspec&#10; -&gt; SmoothFrame -&gt; SmoothFrame (0.0.1)&#10;    - WARN  | summary: The summary is not meaningful.&#10;    - WARN  | url: There was a problem validating the URL https://github.com/akateason/SmoothFrame.&#10;    - ERROR | [iOS] unknown: Encountered an unknown error ([!] /usr/bin/git clone https://github.com/akateason/SmoothFrame.git /var/folders/41/kz5m30dx189_z3pcxz76_tkr0000gn/T/d20220810-24538-1xc62kj --template= --single-branch --depth 1 --branch 0.0.1&#10;&#10;Cloning into '/var/folders/41/kz5m30dx189_z3pcxz76_tkr0000gn/T/d20220810-24538-1xc62kj'...&#10;fatal: unable to access 'https://github.com/akateason/SmoothFrame.git/': Failed to connect to github.com port 443: Operation timed out&#10;) during validation.&#10;&#10;[!] The spec did not pass validation, due to 1 error.&#10;" />
+          <failure message="/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/actions/actions_helper.rb:67:in `execute_action'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:255:in `block in execute_action'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:229:in `chdir'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:229:in `execute_action'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing'&#10;../../../../../../../var/folders/41/kz5m30dx189_z3pcxz76_tkr0000gn/T/fl_clone20220810-25354-1tytvld/fastlane-files.git/fastlane/Fastfile:27:in `block in parsing_binding'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:49:in `block in execute'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:45:in `chdir'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/runner.rb:45:in `execute'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/lane_manager.rb:47:in `cruise_lane'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/commands_generator.rb:110:in `block (2 levels) in run'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-4.6.0/lib/commander/command.rb:187:in `call'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-4.6.0/lib/commander/command.rb:157:in `run'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-4.6.0/lib/commander/runner.rb:444:in `run_active_command'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:124:in `run!'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-4.6.0/lib/commander/delegates.rb:18:in `run!'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/commands_generator.rb:354:in `run'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/commands_generator.rb:43:in `start'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/fastlane/lib/fastlane/cli_tools_distributor.rb:123:in `take_off'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.208.0/bin/fastlane:23:in `&lt;top (required)&gt;'&#10;/usr/local/bin/fastlane:23:in `load'&#10;/usr/local/bin/fastlane:23:in `&lt;main&gt;'&#10;&#10;Exit status of command 'pod trunk push 'SmoothFrame.podspec' --allow-warnings --use-libraries' was 1 instead of 0.&#10;Updating spec repo `trunk`&#10;Validating podspec&#10; -&gt; SmoothFrame -&gt; SmoothFrame (0.0.2)&#10;    - WARN  | summary: The summary is not meaningful.&#10;    - WARN  | url: There was a problem validating the URL https://github.com/akateason/SmoothFrame.&#10;    - ERROR | [iOS] unknown: Encountered an unknown error ([!] /usr/bin/git clone https://github.com/akateason/SmoothFrame.git /var/folders/41/kz5m30dx189_z3pcxz76_tkr0000gn/T/d20220810-25470-62f5gk --template= --single-branch --depth 1 --branch 0.0.2&#10;&#10;Cloning into '/var/folders/41/kz5m30dx189_z3pcxz76_tkr0000gn/T/d20220810-25470-62f5gk'...&#10;fatal: unable to access 'https://github.com/akateason/SmoothFrame.git/': Failed to connect to github.com port 443: Operation timed out&#10;) during validation.&#10;&#10;[!] The spec did not pass validation, due to 1 error.&#10;" />
         
       </testcase>
     
