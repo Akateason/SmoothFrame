@@ -7,7 +7,7 @@
 - 由于frame绝对定位的特性, 注意setFrame的最佳时机是VC.viewWillLayoutSubviews() 和 view.layoutSubViews() .
 
 
-![图片](/shot.png "shot")
+![图片](https://github.com/Akateason/SmoothFrame/blob/master/shot.png "shot")
 
 
 ```swift
@@ -54,12 +54,10 @@
 
 # 填充满SuperView
 
-```swift
-                
+```swift                
     orangeView.sf.fillWidth()
     orangeView.sf.fillHeight()
     orangeView.sf.fill()
-
 ```
 
 
