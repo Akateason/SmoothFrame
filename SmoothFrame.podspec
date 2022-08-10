@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'SmoothFrame'
   s.version          = '1.0.0'
-  s.summary          = 'A short description of SmoothFrame.'
+  s.summary          = 'TRY SmoothFrame!!!!! 一个SnapKit的frame版本'
   s.description      = <<-DESC
 TODO: Add long description of the pod here.
                        DESC
@@ -14,16 +14,4 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'SmoothFrame/SmoothFrame/**/*'
 
-  # s.resource_bundles = {
-  #   'SmoothFrame' => ['SmoothFrame/Assets/*.png']
-  # }
-
-  #s.subspec 'SmoothFrame' do | sm |
-      #sm.source_files = 'SmoothFrame/ZYSubModule/**/*'
-      #sm.dependency 'AFNetworking', '~> 2.3'
-  #end
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
