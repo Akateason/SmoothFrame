@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SmoothFrame'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = 'A short description of SmoothFrame.'
   s.description      = <<-DESC
 TODO: Add long description of the pod here.
