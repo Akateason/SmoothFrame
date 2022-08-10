@@ -7,6 +7,9 @@
 - 由于frame绝对定位的特性, 注意setFrame的最佳时机是VC.viewWillLayoutSubviews() 和 view.layoutSubViews() .
 
 
+![图片](shot.png "shot")
+
+
 ```swift
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +27,11 @@
 # 关系型布局
 ## 和SuperView的关系
 ```swift
-        // 1.1 Relation with super
-        pinkView.sf.setLeft(0).setHeight(99).setBottom(0).setRight(3)
+    // 1.1 Relation with super
+    pinkView.sf.setLeft(0).setHeight(99).setBottom(0).setRight(3)
         
-        // 1.2 set edges
-        pinkSubView.sf.setEdges(top: 2, bottom: 23, left: 111, right: 50)
-        
+    // 1.2 set edges
+    pinkSubView.sf.setEdges(top: 2, bottom: 23, left: 111, right: 50)        
         
 ```
 
@@ -50,7 +52,7 @@
 ```
 
 
-# 填充 fill
+# 填充满SuperView
 
 ```swift
                 
@@ -64,23 +66,22 @@
 # 拉伸宽高
 
 ```swift
-        cyanView.frame = yellowView.frame
-        cyanView.sf.addWidth(11, on: .right).addWidth(9, on: .left).addHeight(11, on: .bottom)
+    cyanView.frame = yellowView.frame
+    cyanView.sf.addWidth(11, on: .right).addWidth(9, on: .left).addHeight(11, on: .bottom)
 ```
 
 
 # 基础方法 绝对定位
 
 ```swift
-        blueView.sf
-        .setSize(CGSize(width: 99, height: 33))
-        .setCenter(CGPoint(x: 137, y: 69))
-        
-        redView.sf
-        .setX(134)
-        .setY(39)
-        .setWidth(64)
-        .setHeight(64)
-
+    blueView.sf
+    .setSize(CGSize(width: 99, height: 33))
+    .setCenter(CGPoint(x: 137, y: 69))
+    
+    redView.sf
+    .setX(134)
+    .setY(39)
+    .setWidth(64)
+    .setHeight(64)
 ```
 
