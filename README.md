@@ -24,7 +24,7 @@
 ```
 
 # 关系型布局
-## 1. 和SuperView的关系
+## 和SuperView的关系
 ```swift
         // 1.1 Relation with super
         pinkView.sf.setLeft(0).setHeight(99).setBottom(0).setRight(3)
@@ -35,7 +35,7 @@
         
 ```
 
-## 2. 和其他任意View的关系
+## 和其他任意View的关系
 
 ```swift
         //2 relation with other

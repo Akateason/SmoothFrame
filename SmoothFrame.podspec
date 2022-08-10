@@ -12,7 +12,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'SmoothFrame/Classes/**/*'
+  s.source_files = 'SmoothFrame/SmoothFrame/**/*'
 
   # s.resource_bundles = {
   #   'SmoothFrame' => ['SmoothFrame/Assets/*.png']
